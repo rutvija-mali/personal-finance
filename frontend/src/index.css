@@ -1,1 +1,92 @@
+/* ==========================================================================
+   Tailwind v4 entry (CSS-first)
+   This enables utility classes like `text-primary`, `bg-surface`, `border-border`.
+   ========================================================================== */
+
 @import "tailwindcss";
+
+/* ==========================================================================
+   Theme tokens (LIGHT only for now)
+   Tailwind maps `--color-*` tokens to color utilities automatically.
+   Example: `--color-primary` -> `text-primary`, `bg-primary`, `border-primary`, etc.
+   ========================================================================== */
+
+@theme {
+  /* Brand (Indigo) */
+  --color-primary: rgb(79 70 229);         /* indigo-600 */
+  --color-primary-hover: rgb(67 56 202);   /* indigo-700 */
+  --color-primary-soft: rgb(224 231 255);  /* indigo-100 */
+
+  /* Backgrounds (Neutral grays) */
+  --color-bg: rgb(248 250 252);            /* slate-50 */
+  --color-surface: rgb(255 255 255);       /* white */
+  --color-muted-surface: rgb(241 245 249); /* slate-100 */
+
+  /* Text */
+  --color-text: rgb(15 23 42);             /* slate-900 */
+  --color-text-muted: rgb(71 85 105);      /* slate-600 */
+  --color-text-inverse: rgb(255 255 255);  /* white */
+
+  /* Borders */
+  --color-border: rgb(226 232 240);        /* slate-200 */
+  --color-border-strong: rgb(203 213 225); /* slate-300 */
+
+  /* States */
+  --color-success: rgb(22 163 74);         /* green-600 */
+  --color-danger: rgb(220 38 38);          /* red-600 */
+  --color-warning: rgb(245 158 11);        /* amber-500 */
+}
+
+/* ==========================================================================
+   Base styles
+   ========================================================================== */
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    @apply min-h-screen bg-bg text-text antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary-soft text-text;
+  }
+
+  a {
+    @apply text-primary no-underline;
+  }
+
+  a:hover {
+    @apply text-primary-hover;
+  }
+}
+
+/* ==========================================================================
+   Reusable component utilities
+   ========================================================================== */
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-border bg-surface shadow-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 font-medium text-text-inverse transition-colors;
+  }
+
+  .btn-primary:hover {
+    @apply bg-primary-hover;
+  }
+
+  .btn-primary:focus-visible {
+    @apply outline-none ring-2 ring-primary/35 ring-offset-2 ring-offset-surface;
+  }
+
+  .btn-primary:disabled {
+    @apply cursor-not-allowed opacity-60;
+  }
+}
+
+

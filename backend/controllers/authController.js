@@ -10,7 +10,7 @@ export const register = async(req, res, next)=>{
 
     if(existingUser) return res.status(500).json({message:"User already exists"})
     
-    const hashedPassword =   bcrypt.hash(password);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await User({
         name,
         email,
@@ -28,7 +28,7 @@ export const register = async(req, res, next)=>{
 
 export const login = async (req, res, next)=>{
   try {
-    const {name, email, password} = req.body;
+    const {email, password} = req.body;
     const existingUser = await User.findOne({email})
     if(!existingUser) return res.status(404).json({message:"Invalid credentials"})
     
@@ -41,7 +41,7 @@ export const login = async (req, res, next)=>{
         email:existingUser.email
     }, process.env.JWT_SECRET,{expiresIn:'3hr'})
 
-    res.cookie({
+    res.cookie('token', token,{
         httpOnly:true,
         secure:true,
         sameSite: 'none',

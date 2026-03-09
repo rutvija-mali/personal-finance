@@ -1,8 +1,17 @@
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <h1 className="text-2xl font-bold text-gray-800">Finance App</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/signup" replace />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/signup" replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
